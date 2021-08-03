@@ -65,11 +65,11 @@ snake.
 
 Compilation Instructions
 ------
-When adding files (and you should) to your player, modify the Makefile such that the files required for your Player are added to the PLAYER_SOURCE group in the Makefile.
+When adding files (and you should) to your player, modify the Makefile such that the files required for your Player are added to the `PLAYER_SOURCE` group in the Makefile.
 Example:
 
-PLAYER_SOURCE = player.cpp graph.cpp dfsPaths.cpp logicFunctions.cpp
-Of course, your file names will likely be different. You are welcome to modify the Makefile to suit your preference but it must create a shared library by the name libPlayer.so regardless of anything else you change it to do. In its original state, it does this using only the player.cpp file (and associated .h file).
+`PLAYER_SOURCE = player.cpp graph.cpp dfsPaths.cpp logicFunctions.cpp`
+Of course, your file names will likely be different. You are welcome to modify the Makefile to suit your preference but it must create a shared library by the name `libPlayer.so` regardless of anything else you change it to do. In its original state, it does this using only the `player.cpp` file (and associated .h file).
 The included Makefile can build the graphic version of the game snake or the bulk testing version of the game driver:
 
 Build the bulk version of the game and run it 100 times collecting the results:
@@ -87,7 +87,7 @@ done
 ...
 ```
 The commands (above) are bash shell commands. The first line is a for loop which says, for each number in a sequence from 1 to 100, assign the variable count to the number. The do is like the opening brace for a block of code. The echo just echos the index of the loop currently running. This is so you know your player isn't hung. The `driver >> Out.dat` says, run the driver executable and append the output to the file named `Out.dat`. The done is like the closing brace for the for loop.
-After running the (above) bash script, you'll have a file named Out.dat which contains the results of 100 runs concatenated together. You can use this script to total and average those runs as follows:
+After running the (above) bash script, you'll have a file named `Out.dat` which contains the results of 100 runs concatenated together. You can use this script to total and average those runs as follows:
 ```
 % ./avgScores.pl < Out.dat
 Number Items : 100
@@ -104,7 +104,7 @@ Build the graphic version of the game and run it setting the width, height, and 
 % snake 40 33 [true|FALSE]
 ```
 You can change the playfield so that it will add obstacles by adding a true as the third command line parameter. If you leave the third parameter off, the default value is false
-The first time running in a shell you will need to set the LD_LIBRARY_PATH environment variable. This allows the driver and graphics part of the code to find your player's shared library (libPlayer.so), even if it's not in the local directory, at runtime. We'll talk more about the benefits of shared libraries in the coming weeks.
+The first time running in a shell you will need to set the LD_LIBRARY_PATH environment variable. This allows the driver and graphics part of the code to find your player's shared library (`libPlayer.so`), even if it's not in the local directory, at runtime. We'll talk more about the benefits of shared libraries in the coming weeks.
 ```
 % export LD_LIBRARY_PATH=.
 % make driver           // build the bulk testing / no graphic driver
@@ -119,10 +119,11 @@ Compilation Instructions Author: Dr. Paul Hinker
 
 Emscripten Compilation Instructions and to Host on the Web
 ------
+```
 export LD_LIBRARY_PATH=.
 
 em++ -std=c++17 -O2 -s ALLOW_MEMORY_GROWTH=1 -s MAX_WEBGL_VERSION=2 -s MIN_WEBGL_VERSION=2 -s USE_LIBPNG=1 application.cpp main.cpp playfield.cpp snakeGraph.cpp biconnected.cpp cc.cpp game.cpp player.cpp dfsPaths.cpp bfsPaths.cpp bridges.cpp astar.cpp -o snake.html
 
 emrun snake.html --port 4000
+```
 port forward to port 4000
-
