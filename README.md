@@ -73,7 +73,7 @@ Of course, your file names will likely be different. You are welcome to modify t
 The included Makefile can build the graphic version of the game snake or the bulk testing version of the game driver:
 
 Build the bulk version of the game and run it 100 times collecting the results:
-
+```
 % make driver
 % for count in $(seq 1 100)
 do
@@ -85,28 +85,36 @@ done
 3
 4
 ...
-The commands (above) are bash shell commands. The first line is a for loop which says, for each number in a sequence from 1 to 100, assign the variable count to the number. The do is like the opening brace for a block of code. The echo just echos the index of the loop currently running. This is so you know your player isn't hung. The driver >> Out.dat says, run the driver executable and append the output to the file named Out.dat. The done is like the closing brace for the for loop.
+```
+The commands (above) are bash shell commands. The first line is a for loop which says, for each number in a sequence from 1 to 100, assign the variable count to the number. The do is like the opening brace for a block of code. The echo just echos the index of the loop currently running. This is so you know your player isn't hung. The `driver >> Out.dat` says, run the driver executable and append the output to the file named `Out.dat`. The done is like the closing brace for the for loop.
 After running the (above) bash script, you'll have a file named Out.dat which contains the results of 100 runs concatenated together. You can use this script to total and average those runs as follows:
-
+```
 % ./avgScores.pl < Out.dat
 Number Items : 100
 Average Score: 31.864
 Maximum Score: 72
+```
 The script is a perl script which just grabs each result, sums, and averages the results. If you are going to run it, make sure to change its execute flag so it will run:
+```
 % chmod +x avgScores.pl
+```
 Build the graphic version of the game and run it setting the width, height, and whether or not obstacles should be placed in the playfield
+```
 % make snake
 % snake 40 33 [true|FALSE]
+```
 You can change the playfield so that it will add obstacles by adding a true as the third command line parameter. If you leave the third parameter off, the default value is false
 The first time running in a shell you will need to set the LD_LIBRARY_PATH environment variable. This allows the driver and graphics part of the code to find your player's shared library (libPlayer.so), even if it's not in the local directory, at runtime. We'll talk more about the benefits of shared libraries in the coming weeks.
-
+```
 % export LD_LIBRARY_PATH=.
 % make driver           // build the bulk testing / no graphic driver
 % make snake            // build the graphic version
+```
 If you do not do this, you will get an error which looks something like this:
+```
 $ snake
 snake: error while loading shared libraries: libPlayer.so: cannot open shared object file: No such file or directory
-
+```
 Compilation Instructions Author: Dr. Paul Hinker
 
 Emscripten Compilation Instructions and to Host on the Web
